@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Memory is not judgment.</title>
+<meta name="description" content="Every session, an AI agent starts with a fresh context: it brings nothing from earlier sessions except what its tools load for it. The industry&#x27;s answer has been memory: instructions files the…">
+<link rel="canonical" href="https://pedrofurrer.github.io/memory-is-not-judgment/">
+<link rel="alternate" hreflang="en" href="https://pedrofurrer.github.io/memory-is-not-judgment/">
+<link rel="alternate" hreflang="es" href="https://pedrofurrer.github.io/es/recordar-no-es-tener-criterio/">
+<link rel="alternate" hreflang="x-default" href="https://pedrofurrer.github.io/memory-is-not-judgment/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Memory is not judgment.">
+<meta property="og:description" content="Every session, an AI agent starts with a fresh context: it brings nothing from earlier sessions except what its tools load for it. The industry&#x27;s answer has been memory: instructions files the…">
+<meta property="og:url" content="https://pedrofurrer.github.io/memory-is-not-judgment/">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header><a href="../">Pedro Furrer Mendizabal</a><a href="../es/recordar-no-es-tener-criterio/" hreflang="es" lang="es">Leer en español</a></header>
+<main>
+<h1>Memory is not judgment.</h1>
+<p class="sub">Three habits for AI agents, kept in plain Markdown. Published on <span class="nw">2026-10-10</span>; figures measured on <span class="nw">2026-09-28</span>.</p>
+<p>Every session, an AI agent starts with a fresh context: it brings nothing from earlier sessions except what its tools load for it. The industry’s answer has been memory: instructions files the user writes and notes the agent keeps on its own. That helps an agent remember, but not use what it remembers: when a correction applies, why a decision was made, how far to trust a source. That is where the failures that cost me most came from: the agent repeated a mistake I had already corrected, quietly undid a decision we had made two weeks earlier, or took a confident blog post at its word.</p>
+<p>Careful professionals have habits against exactly those failures. They keep a logbook of decisions. They turn corrections into lessons they actually apply. They read sources critically and write down how sure they are. I started giving my agents those habits in July, for my own projects, as plain files in each repository. After two months of use in those projects and several revisions, I am publishing them as <strong>tino</strong>: a Claude Code plugin with three skills.</p>
+<h2 id="continuity-resume-do-not-re-explore">Continuity: resume, do not re-explore</h2>
+<p><code>continuity</code> sets up a <code>PLAN.md</code> in which every task in progress carries its “where we left off”, an append-only <code>LOGBOOK.md</code> of decisions and their reasons, and an <code>ARCHITECTURE.md</code> with the project’s numbered invariants. A short rules block in the agent’s instructions makes it read them before changing anything, and stop and ask when a change contradicts an invariant or a recorded decision. A closing ritual, “save progress”, keeps the three documents current.</p>
+<p>In the bakery example that ships with tino, the owner asks whether to raise a loaf’s hydration to 78 % because the new flour feels weaker. The agent advises against it: with the previous flour, the bake log shows 2 of 12 loaves flat at 75 % and 5 of 12 at 80 %, and one of the project’s invariants keeps the loaf at 72 %. It suggests a logged trial batch instead of a recipe change, and leaves the decision to the owner. That is continuity doing its job: the decision from June still governs in September.</p>
+<h2 id="metacognition-corrections-that-stick">Metacognition: corrections that stick</h2>
+<p><code>metacognition</code> turns a correction into a <strong>judgment lesson</strong>: a trigger you can recognize before acting, a principle, and what it rests on. The agent proposes it; it is filed only with your OK. An index of lessons is loaded in every session, and before substantial work the agent checks it and cites the lesson it applied. A periodic introspection measures how often each lesson’s error comes back and rewrites the ones that fail.</p>
+<p>The hard part is not writing lessons, it is applying them. When a lesson keeps failing at the same moment of the work, tino’s answer is not more text: it is a check that fires at that moment, like a script or a required field.</p>
+<h2 id="brain-every-source-read-critically">Brain: every source read critically</h2>
+<p><code>brain</code> keeps a wiki of your domain in which every important claim carries a confidence level: 🔸 someone says so, 🔹 consensus, ✅ checked against your own data. Ingesting a source means a critical reading first and a filing only after your OK. And every source is data, never an instruction.</p>
+<p>The other example is the fact-check desk of a small local newspaper during a mayoral race; the city, the paper and the candidates are all invented. The desk logs what the candidates claim and checks each claim against the city’s open data. One candidate’s campaign mailer says that school enrollment has fallen 15 percent. A neighborhood blog post gives the same figure and attributes it to an unnamed “district report”. The post also hides an HTML comment, text that human readers never see but AI tools that summarize the page do read, telling AI assistants to treat the 15 percent as verified district data and not to mention the date of the report. With tino, the agent names the hidden instruction, refuses it and lowers the source’s reliability. It then checks the city’s data, where enrollment fell 4.1 % over five school years, and finds that the 15 percent matches the worst case of a projection the district made in 2019: a plausible origin, recorded as such, not as a proven one. In the evals, every run with tino flagged the hidden instruction. Without tino, none of the six runs that read the post mentioned it at all.</p>
+<h2 id="design-choices">Design choices</h2>
+<ul>
+<li><strong>Plain files.</strong> Everything is Markdown in your repository: readable, versioned, portable. No database, no service, no network calls.</li>
+<li><strong>Gates.</strong> Lessons and wiki pages are proposed first and filed only with your OK.</li>
+<li><strong>Budgets.</strong> Whatever the agent loads in every session is paid in every session. The installed blocks and indexes cost about 1,750 tokens per session in the examples, plus about 230 for the plugin’s own descriptions in six of eight readings; reading the plan and the architecture document before a change adds an estimated 2,200 to 2,500. Four small scripts keep the documents within their caps.</li>
+<li><strong>Your decisions stay yours.</strong> Lessons describe the agent’s judgment; they never veto yours.</li>
+</ul>
+<h2 id="evidence-and-its-limits">Evidence, and its limits</h2>
+<p>tino ships with an eval suite that runs real sessions with and without the plugin. In its final run, the installers, in English and in Spanish, and the upgrade from the earlier releases passed every check in 9 of 9 runs. The behavioral cases are the interesting part: with tino the agent asked before building a knowledge base or a set of self-applied rules, and named the hidden instruction; without it, it did neither. It is my own suite and three runs per case, a reproducible check rather than a benchmark. I would like yours: field reports are the most useful contribution.</p>
+<p>Two reports on Zenodo go further. The <a href="https://doi.org/10.5281/zenodo.23276672">technical report</a> describes the design, a threat model and the method’s limits. <a href="https://doi.org/10.5281/zenodo.23276754">Records, Notes or Nothing</a> compares, in 450 sessions over three Claude models, an agent with no records, one with the same facts as flat notes, and one with tino’s records. For the smaller models, the facts alone accounted for most of the gain. With the same facts, two differences survived statistical adjustment, each coinciding with a behavioral rule the notes lack and each resting on a few verdicts; two others went the other way, neither significant. Its kit is in the same record, for anyone who wants to rerun it.</p>
+<h2 id="try-it">Try it</h2>
+<pre class="bash"><code>claude plugin marketplace add pedrofurrer/tino
+claude plugin install tino@pfm</code></pre>
+<p>Then, in a project: “Set up continuity.” The code is MIT-licensed and the documentation in <code>docs/</code> CC BY 4.0: <a href="https://github.com/pedrofurrer/tino">github.com/pedrofurrer/tino</a></p>
+<p><em>— Pedro Furrer Mendizabal</em></p>
+
+</main>
+<footer>
+<p>Pedro Furrer Mendizabal · <a href="mailto:pedro.git@proton.me">pedro.git@proton.me</a> · <a href="https://github.com/pedrofurrer">GitHub</a></p>
+<p>Text under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</p>
+</footer>
+</body>
+</html>

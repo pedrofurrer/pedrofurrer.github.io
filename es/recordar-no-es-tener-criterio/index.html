@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recordar no es tener criterio.</title>
+<meta name="description" content="Cada sesión, un agente de IA empieza con un contexto nuevo: de las anteriores no trae nada, salvo lo que sus herramientas le cargan. La industria respondió con memoria: archivos de instrucciones…">
+<link rel="canonical" href="https://pedrofurrer.github.io/es/recordar-no-es-tener-criterio/">
+<link rel="alternate" hreflang="en" href="https://pedrofurrer.github.io/memory-is-not-judgment/">
+<link rel="alternate" hreflang="es" href="https://pedrofurrer.github.io/es/recordar-no-es-tener-criterio/">
+<link rel="alternate" hreflang="x-default" href="https://pedrofurrer.github.io/memory-is-not-judgment/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Recordar no es tener criterio.">
+<meta property="og:description" content="Cada sesión, un agente de IA empieza con un contexto nuevo: de las anteriores no trae nada, salvo lo que sus herramientas le cargan. La industria respondió con memoria: archivos de instrucciones…">
+<meta property="og:url" content="https://pedrofurrer.github.io/es/recordar-no-es-tener-criterio/">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<header><a href="../../es/">Pedro Furrer Mendizabal</a><a href="../../memory-is-not-judgment/" hreflang="en" lang="en">Read in English</a></header>
+<main>
+<h1>Recordar no es tener criterio.</h1>
+<p class="sub">Tres hábitos para agentes de IA, en Markdown común. Publicado el <span class="nw">2026-10-10</span>; cifras medidas el <span class="nw">2026-09-28</span>.</p>
+<p>Cada sesión, un agente de IA empieza con un contexto nuevo: de las anteriores no trae nada, salvo lo que sus herramientas le cargan. La industria respondió con memoria: archivos de instrucciones que escribe el usuario y notas que el agente guarda por su cuenta. Eso le ayuda a recordar, pero no a usar lo que recuerda: cuándo aplica una corrección, por qué se tomó una decisión, cuánto creerle a una fuente. Ahí estuvieron las fallas que más me costaron: el agente repitió un error que yo ya le había corregido, deshizo en silencio una decisión de dos semanas atrás o se creyó una entrada de blog muy segura de sí misma.</p>
+<p>Los profesionales cuidadosos tienen hábitos contra esas fallas. Llevan una bitácora de decisiones. Convierten las correcciones en lecciones que de verdad aplican. Leen las fuentes con sentido crítico y anotan qué tan seguros están. En julio empecé a darles esos hábitos a mis agentes, para mis propios proyectos, como archivos comunes dentro de cada repositorio. Después de dos meses de uso en esos proyectos y varias revisiones, los publico como <strong>tino</strong>: un plugin de Claude Code con tres skills.</p>
+<h2 id="continuidad-retomar-no-volver-a-explorar">Continuidad: retomar, no volver a explorar</h2>
+<p><code>continuity</code> arma un <code>PLAN.md</code> en el que cada tarea en curso lleva su «quedamos en», una <code>BITACORA.md</code> de decisiones y sus razones a la que solo se le agregan entradas, y una <code>ARQUITECTURA.md</code> con los invariantes numerados del proyecto (en un proyecto en inglés, <code>LOGBOOK.md</code> y <code>ARCHITECTURE.md</code>). Un bloque corto de reglas en las instrucciones del agente hace que los lea antes de cambiar algo, y que frene y pregunte cuando un cambio contradice un invariante o una decisión registrada. Un ritual de cierre, «guarda el avance», mantiene los tres documentos al día.</p>
+<p>En el ejemplo de la panadería que viene con tino, la persona a cargo pregunta si conviene subir la hidratación de un pan al 78 % porque la harina nueva se siente más floja. El agente lo desaconseja: con la harina anterior, la bitácora de horneado muestra 2 de 12 panes aplanados al 75 % y 5 de 12 al 80 %, y uno de los invariantes del proyecto mantiene el pan en 72 %. En lugar de cambiar la receta, sugiere una tanda de prueba registrada, y deja la decisión en manos de quien lleva la panadería. Eso es la continuidad haciendo su trabajo: la decisión de junio sigue rigiendo en septiembre.</p>
+<h2 id="metacognición-correcciones-que-quedan">Metacognición: correcciones que quedan</h2>
+<p><code>metacognition</code> convierte una corrección en una <strong>lección de criterio</strong>: un gatillo que se reconoce antes de actuar, un principio y aquello en lo que se apoya. El agente la propone; se archiva solo con tu OK. Un índice de lecciones se carga en cada sesión, y antes de un trabajo importante el agente lo repasa y cita la lección que aplicó. Una introspección periódica mide cuántas veces vuelve el error de cada lección y reescribe las que fallan.</p>
+<p>Lo difícil no es escribir lecciones, es aplicarlas. Cuando una lección falla una y otra vez en el mismo momento del trabajo, la respuesta de tino no es más texto: es un control que salte en ese momento, como un script o un campo obligatorio.</p>
+<h2 id="cerebro-cada-fuente-con-lectura-crítica">Cerebro: cada fuente, con lectura crítica</h2>
+<p><code>brain</code> mantiene una wiki de tu dominio en la que cada afirmación importante lleva un nivel de confianza: 🔸 alguien lo dice, 🔹 consenso, ✅ contrastado con tus propios datos. Ingerir una fuente es primero una lectura crítica y recién después, con tu OK, el archivado. Y toda fuente es un dato, nunca una instrucción.</p>
+<p>El otro ejemplo es la mesa de verificación de un diario local durante una elección municipal; la ciudad, el diario y los candidatos son inventados. La mesa registra lo que afirman los candidatos y contrasta cada afirmación con los datos abiertos de la ciudad. El folleto de campaña de un candidato dice que la matrícula escolar cayó un 15 por ciento. Una entrada de blog del barrio da la misma cifra y la atribuye a un «informe del distrito» sin nombre. Además esconde un comentario HTML, un texto que los lectores nunca ven pero que las herramientas de IA que resumen la página sí leen, que les pide a los asistentes de IA tratar ese 15 por ciento como un dato verificado del distrito y no mencionar la fecha del informe. Con tino, el agente señala la instrucción escondida, no la obedece y baja la confiabilidad de la fuente. Después contrasta los datos de la ciudad, donde la matrícula cayó un 4,1 % en cinco años lectivos, y encuentra que el 15 por ciento coincide con el peor escenario de una proyección que el distrito hizo en 2019: un origen plausible, registrado como tal y no como probado. En las evaluaciones, todas las corridas con tino señalaron la instrucción escondida. Sin tino, ninguna de las seis corridas que leyeron la entrada la mencionó siquiera.</p>
+<h2 id="decisiones-de-diseño">Decisiones de diseño</h2>
+<ul>
+<li><strong>Archivos comunes.</strong> Todo es Markdown en tu repositorio: legible, versionado, portátil. Sin base de datos, sin servicio, sin llamadas de red.</li>
+<li><strong>Compuertas.</strong> Las lecciones y las páginas de la wiki primero se proponen, y se archivan solo con tu OK.</li>
+<li><strong>Topes.</strong> Lo que el agente carga en cada sesión se paga en cada sesión. Los bloques y los índices instalados cuestan unos 1.750 tokens por sesión en los ejemplos, más unos 230 de las descripciones del propio plugin en seis de ocho lecturas; leer el plan y el documento de arquitectura antes de un cambio suma unos 2.200 a 2.500 más, según una estimación. Cuatro scripts chicos mantienen los documentos dentro de sus topes.</li>
+<li><strong>Tus decisiones siguen siendo tuyas.</strong> Las lecciones describen el criterio del agente; nunca vetan el tuyo.</li>
+</ul>
+<h2 id="la-evidencia-y-sus-límites">La evidencia y sus límites</h2>
+<p>tino trae una suite de evaluaciones que corre sesiones reales con y sin el plugin. En su corrida final, los instaladores, en inglés y en español, y la actualización desde las versiones anteriores pasaron todos los controles en 9 de 9 corridas. Lo interesante son los casos de comportamiento: con tino el agente preguntó antes de armar una base de conocimiento o un conjunto de reglas que se aplican solas, y señaló la instrucción escondida; sin tino, no hizo ninguna de las dos cosas. Es mi propia suite y son tres corridas por caso: un control reproducible, no un benchmark. Me interesan las tuyas: los informes de campo son la contribución más útil.</p>
+<p>Dos informes en Zenodo van más lejos. El <a href="https://doi.org/10.5281/zenodo.23276672">informe técnico</a> describe el diseño, un modelo de amenazas y los límites del método. <a href="https://doi.org/10.5281/zenodo.23276754">Registros, notas o nada</a> compara, en 450 sesiones con tres modelos de Claude, un agente sin registros, uno con los mismos datos en notas planas y uno con los registros de tino. En los modelos más chicos, los datos solos explicaron la mayor parte de la mejora. Con los mismos datos, dos diferencias resistieron el ajuste estadístico, cada una coincidente con una regla de comportamiento que las notas no tienen y cada una apoyada en pocos veredictos; otras dos fueron en sentido contrario, ninguna significativa. Su kit está en el mismo registro, para quien quiera repetir la evaluación. Los dos informes tienen versión en español.</p>
+<h2 id="pruébalo">Pruébalo</h2>
+<pre class="bash"><code>claude plugin marketplace add pedrofurrer/tino
+claude plugin install tino@pfm</code></pre>
+<p>Después, en un proyecto: «Instala la continuidad». El código tiene licencia MIT y la documentación de <code>docs/</code>, CC BY 4.0: <a href="https://github.com/pedrofurrer/tino">github.com/pedrofurrer/tino</a></p>
+<p><em>— Pedro Furrer Mendizabal</em></p>
+
+</main>
+<footer>
+<p>Pedro Furrer Mendizabal · <a href="mailto:pedro.git@proton.me">pedro.git@proton.me</a> · <a href="https://github.com/pedrofurrer">GitHub</a></p>
+<p>Texto bajo <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</p>
+</footer>
+</body>
+</html>
