@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Recordar no es tener criterio.</title>
-<meta name="description" content="Cada sesión, un agente de IA empieza con un contexto nuevo: de las anteriores no trae nada, salvo lo que sus herramientas le cargan. La industria respondió con memoria: archivos de instrucciones…">
+<meta name="description" content="Un modelo de IA no aprende de una conversación a otra: cada sesión empieza con un contexto nuevo, y lo que pasó antes solo existe si alguien se lo vuelve a dar. La industria respondió con memoria:…">
 <link rel="canonical" href="https://pedrofurrer.github.io/es/recordar-no-es-tener-criterio/">
 <link rel="alternate" hreflang="en" href="https://pedrofurrer.github.io/memory-is-not-judgment/">
 <link rel="alternate" hreflang="es" href="https://pedrofurrer.github.io/es/recordar-no-es-tener-criterio/">
 <link rel="alternate" hreflang="x-default" href="https://pedrofurrer.github.io/memory-is-not-judgment/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Recordar no es tener criterio.">
-<meta property="og:description" content="Cada sesión, un agente de IA empieza con un contexto nuevo: de las anteriores no trae nada, salvo lo que sus herramientas le cargan. La industria respondió con memoria: archivos de instrucciones…">
+<meta property="og:description" content="Un modelo de IA no aprende de una conversación a otra: cada sesión empieza con un contexto nuevo, y lo que pasó antes solo existe si alguien se lo vuelve a dar. La industria respondió con memoria:…">
 <meta property="og:url" content="https://pedrofurrer.github.io/es/recordar-no-es-tener-criterio/">
 <link rel="stylesheet" href="../../style.css">
 </head>
@@ -20,7 +20,7 @@
 <main>
 <h1>Recordar no es tener criterio.</h1>
 <p class="sub">Tres hábitos para agentes de IA, en Markdown común. Publicado el <span class="nw">2026-10-10</span>; cifras medidas el <span class="nw">2026-09-28</span>.</p>
-<p>Cada sesión, un agente de IA empieza con un contexto nuevo: de las anteriores no trae nada, salvo lo que sus herramientas le cargan. La industria respondió con memoria: archivos de instrucciones que escribe el usuario y notas que el agente guarda por su cuenta. Eso le ayuda a recordar, pero no a usar lo que recuerda: cuándo aplica una corrección, por qué se tomó una decisión, cuánto creerle a una fuente. Ahí estuvieron las fallas que más me costaron: el agente repitió un error que yo ya le había corregido, deshizo en silencio una decisión de dos semanas atrás o se creyó una entrada de blog muy segura de sí misma.</p>
+<p>Un modelo de IA no aprende de una conversación a otra: cada sesión empieza con un contexto nuevo, y lo que pasó antes solo existe si alguien se lo vuelve a dar. La industria respondió con memoria: archivos de instrucciones que escribe el usuario y notas que el agente guarda por su cuenta. Eso le ayuda a recordar, pero no a usar lo que recuerda: cuándo aplica una corrección, por qué se tomó una decisión, cuánto creerle a una fuente. Ahí estuvieron las fallas que más me costaron: el agente repitió un error que yo ya le había corregido, deshizo en silencio una decisión de dos semanas atrás o se creyó una entrada de blog muy segura de sí misma.</p>
 <p>Los profesionales cuidadosos tienen hábitos contra esas fallas. Llevan una bitácora de decisiones. Convierten las correcciones en lecciones que de verdad aplican. Leen las fuentes con sentido crítico y anotan qué tan seguros están. En julio empecé a darles esos hábitos a mis agentes, para mis propios proyectos, como archivos comunes dentro de cada repositorio. Después de dos meses de uso en esos proyectos y varias revisiones, los publico como <strong>tino</strong>: un plugin de Claude Code con tres skills.</p>
 <h2 id="continuidad-retomar-no-volver-a-explorar">Continuidad: retomar, no volver a explorar</h2>
 <p><code>continuity</code> arma un <code>PLAN.md</code> en el que cada tarea en curso lleva su «quedamos en», una <code>BITACORA.md</code> de decisiones y sus razones a la que solo se le agregan entradas, y una <code>ARQUITECTURA.md</code> con los invariantes numerados del proyecto (en un proyecto en inglés, <code>LOGBOOK.md</code> y <code>ARCHITECTURE.md</code>). Un bloque corto de reglas en las instrucciones del agente hace que los lea antes de cambiar algo, y que frene y pregunte cuando un cambio contradice un invariante o una decisión registrada. Un ritual de cierre, «guarda el avance», mantiene los tres documentos al día.</p>

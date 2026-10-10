@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Memory is not judgment.</title>
-<meta name="description" content="Every session, an AI agent starts with a fresh context: it brings nothing from earlier sessions except what its tools load for it. The industry&#x27;s answer has been memory: instructions files the…">
+<meta name="description" content="An AI model does not learn from one conversation to the next: each session starts with a fresh context, and what happened before exists only if something gives it back. The industry&#x27;s answer has…">
 <link rel="canonical" href="https://pedrofurrer.github.io/memory-is-not-judgment/">
 <link rel="alternate" hreflang="en" href="https://pedrofurrer.github.io/memory-is-not-judgment/">
 <link rel="alternate" hreflang="es" href="https://pedrofurrer.github.io/es/recordar-no-es-tener-criterio/">
 <link rel="alternate" hreflang="x-default" href="https://pedrofurrer.github.io/memory-is-not-judgment/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Memory is not judgment.">
-<meta property="og:description" content="Every session, an AI agent starts with a fresh context: it brings nothing from earlier sessions except what its tools load for it. The industry&#x27;s answer has been memory: instructions files the…">
+<meta property="og:description" content="An AI model does not learn from one conversation to the next: each session starts with a fresh context, and what happened before exists only if something gives it back. The industry&#x27;s answer has…">
 <meta property="og:url" content="https://pedrofurrer.github.io/memory-is-not-judgment/">
 <link rel="stylesheet" href="../style.css">
 </head>
@@ -20,7 +20,7 @@
 <main>
 <h1>Memory is not judgment.</h1>
 <p class="sub">Three habits for AI agents, kept in plain Markdown. Published on <span class="nw">2026-10-10</span>; figures measured on <span class="nw">2026-09-28</span>.</p>
-<p>Every session, an AI agent starts with a fresh context: it brings nothing from earlier sessions except what its tools load for it. The industry’s answer has been memory: instructions files the user writes and notes the agent keeps on its own. That helps an agent remember, but not use what it remembers: when a correction applies, why a decision was made, how far to trust a source. That is where the failures that cost me most came from: the agent repeated a mistake I had already corrected, quietly undid a decision we had made two weeks earlier, or took a confident blog post at its word.</p>
+<p>An AI model does not learn from one conversation to the next: each session starts with a fresh context, and what happened before exists only if something gives it back. The industry’s answer has been memory: instructions files the user writes and notes the agent keeps on its own. That helps an agent remember, but not use what it remembers: when a correction applies, why a decision was made, how far to trust a source. That is where the failures that cost me most came from: the agent repeated a mistake I had already corrected, quietly undid a decision we had made two weeks earlier, or took a confident blog post at its word.</p>
 <p>Careful professionals have habits against exactly those failures. They keep a logbook of decisions. They turn corrections into lessons they actually apply. They read sources critically and write down how sure they are. I started giving my agents those habits in July, for my own projects, as plain files in each repository. After two months of use in those projects and several revisions, I am publishing them as <strong>tino</strong>: a Claude Code plugin with three skills.</p>
 <h2 id="continuity-resume-do-not-re-explore">Continuity: resume, do not re-explore</h2>
 <p><code>continuity</code> sets up a <code>PLAN.md</code> in which every task in progress carries its “where we left off”, an append-only <code>LOGBOOK.md</code> of decisions and their reasons, and an <code>ARCHITECTURE.md</code> with the project’s numbered invariants. A short rules block in the agent’s instructions makes it read them before changing anything, and stop and ask when a change contradicts an invariant or a recorded decision. A closing ritual, “save progress”, keeps the three documents current.</p>
